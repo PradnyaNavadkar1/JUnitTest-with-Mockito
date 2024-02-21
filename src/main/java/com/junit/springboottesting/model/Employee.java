@@ -22,6 +22,4 @@ public class Employee {
     @Column(nullable = false)
     private String email;
 
-    //spring batch....
-    // schedular
 }

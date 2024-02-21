@@ -16,25 +16,29 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {
+
         this.employeeService = employeeService;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Employee createEmployee(@RequestBody Employee employee) {
+
         return employeeService.saveEmployee(employee);
     }
 
     @GetMapping
     public List<Employee> getAllEmployee() {
+
         return employeeService.getAllEmployee();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployeeBy(@PathVariable("id") long employeeId) {
-        Optional<Employee> employee = employeeService.getEmployeeById(employeeId);
-        return employee.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+       Employee employee = employeeService.getEmployeeById(employeeId);
+       /* return employee.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());*/
+        return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
 }

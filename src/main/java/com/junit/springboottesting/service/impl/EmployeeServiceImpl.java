@@ -15,6 +15,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
 
     public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+
         this.employeeRepository = employeeRepository;
     }
 
@@ -34,18 +35,20 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Optional<Employee> getEmployeeById(long id) {
-        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
-        return optionalEmployee;
+    public Employee getEmployeeById(long id) {
+        Employee employee = employeeRepository.findById(id).get();
+        return employee;
     }
 
     @Override
     public Employee updateEmployee(Employee updatedEmployee) {
-       return employeeRepository.save(updatedEmployee);
+
+        return employeeRepository.save(updatedEmployee);
     }
 
     @Override
     public void deleteEmployeeById(long id) {
+
         employeeRepository.deleteById(id);
     }
 
